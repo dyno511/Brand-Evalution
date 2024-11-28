@@ -1,0 +1,76 @@
+<div >
+   <canvas id="pieChartjs" width="400" height="300"></canvas>
+  
+</div>
+<div >
+   <canvas id="pieChartjs1" width="400" height="300"></canvas>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/tinycolor-min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/Chart.min.js"></script>
+
+<script type="text/javascript">
+   document.addEventListener("DOMContentLoaded", function () {
+      var element1 = document.getElementById("pieChartjs");
+      var element2 = document.getElementById("pieChartjs1");
+      var data = [
+         ["Demo 1", "Demo 2"], // Labels
+         [23, 77],               // Data
+         ["#000000", "#fff2f2"] // Background colors
+      ];
+
+      // Vẽ biểu đồ Pie
+      Pie(data, element1);
+       Pie(data, element2);
+   });
+
+   function Pie(data, element) {
+      // Dữ liệu biểu đồ
+      var pieChartData = {
+         labels: data[0],
+         datasets: [{
+            data: data[1],
+            backgroundColor: data[2],
+            borderColor: data[2] // Màu viền
+         }]
+      };
+
+     
+      // Cấu hình biểu đồ
+        const pieChartOptions = {
+            maintainAspectRatio: false, // Không duy trì tỷ lệ khung hình
+            responsive: true,           // Biểu đồ thích ứng với màn hình
+            plugins: {
+                legend: {                // Cấu hình chú thích
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {              // Cấu hình tooltip
+                    enabled: true,
+                    callbacks: {
+                        label: function(context) {
+                            // Chỉ hiển thị nhãn mà không có giá trị
+                            return context.label;
+                        }
+                    }
+                }
+            },
+            animation: {                // Hiệu ứng animation
+                duration: 2000,         // Thời gian (ms)
+                easing: 'easeOutBounce' // Kiểu hiệu ứng
+            }
+        };
+
+      // Tạo biểu đồ Pie
+      if (element) {
+         new Chart(element, {
+            type: "pie",
+            data: pieChartData,
+            options: pieChartOptions,
+         });
+      }
+   }
+</script>
+

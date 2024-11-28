@@ -1,0 +1,32 @@
+
+Tối: 
+GPT model:
+tốt xấu tổng (tròn)
+n biểu đồ tốt xấu tổng (năm-tròn)
+biểu đồ dây tốt xấu theo năm
+
+phobert:
+tốt xấu trung tính tổng (tròn)
+n biểu đồ tốt xấu trung tính tổng (năm-tròn)
+biểu đồ dây tốt xấu trung tính theo năm
+
+
+-> biểu đồ tròn GPT vs Phobert (tốt -tôt , xấu - xấu) 
+-> dây theo từng năm GPT vs Phobert (line Gpt(tốt xấu), line phobert )
+
+
+
+biểu đồ tròn theme mẫu :
++ code html k đổi mỗi lần sửa (sao chép)
++ code js nạp dữ liệu, set màu các phần, set tên các phần, tự tính % các phần
++ giao diện lúc đầu chỉ hiện %, click show tên + %. 
++ [0]: nhãn
++ [1]: dữ liệu
++ [2]: màu nền
+
+
+
+Biểu đồ dây:
++ code html k đổi mỗi lần sửa (sao chép)
++ code js nạp dữ liệu, set màu các phần, set tên các phần, tự tính % các phần
++ giao diện lúc đầu chỉ hiện %, click show tên + %. 
