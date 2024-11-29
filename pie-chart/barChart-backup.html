@@ -1,0 +1,113 @@
+
+<div >
+    <canvas id="barChartjs" width="400" height="300"></canvas>
+</div> <!-- /.card-body -->
+                  
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/tinycolor-min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <!-- <script src="js/apps.js"></script> -->
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
+    var element1 = document.getElementById("barChartjs");
+    var data = [
+        [
+          "T1",[
+              ["tốt",23,"rgba(0,85,255,1)"],
+              ["xấu",11,"rgba(60,141,188,1)"]
+            ]
+          ],
+        [
+          "T2",[
+              ["tốt",43,"rgba(0,85,255,1)"],
+              ["xấu",22,"rgba(60,141,188,1)"]
+            ]
+          ]
+      ];
+
+      Bar(data, element1);
+       
+   });
+
+
+
+function Bar(data, element){
+console.log(data[0]);
+console.log(data[0][1]);
+console.log(data[0][1][0]);
+console.log(data[0][1][0][0]);
+console.log(data[0][1][1][0]);
+  var ChartData = {
+      labels: [data[0][0],data[1][0]],
+      datasets: [
+        //tốt
+      {
+        
+         label: [data[0][1][0][0]],
+         barThickness: 10,
+         backgroundColor: [data[0][1][0][2],data[1][1][0][2]],
+         borderColor: "rgba(0,85,255,1)",
+         pointRadius: !1,
+         pointColor: "#3b8bba",
+         pointStrokeColor: "rgba(60,141,188,1)",
+         pointHighlightFill: "#fff",
+         pointHighlightStroke: "rgba(60,141,188,1)",
+         data: [data[0][1][0][1],data[1][1][0][1]],
+         fill: "",
+         lineTension: .1
+      }, 
+      //xấu
+      {
+
+         label: [data[0][1][1][0]],
+         barThickness: 10,
+         backgroundColor: [data[0][1][1][2],data[1][1][1][2]],
+         borderColor: "rgba(0,85,255,1)",
+         pointRadius: !1,
+         pointColor: "#3b8bba",
+         pointStrokeColor: "rgba(60,141,188,1)",
+         pointHighlightFill: "#fff",
+         pointHighlightStroke: "rgba(60,141,188,1)",
+         data: [data[0][1][1][1],data[1][1][1][1]],
+         fill: "",
+         lineTension: .1
+      }
+
+      ]
+   };
+
+
+
+var ChartOptions = {
+      maintainAspectRatio: !1,
+      responsive: !0,
+      legend: {
+         display: !1
+      },
+      scales: {
+         xAxes: [{
+            gridLines: {
+               display: !1
+            }
+         }],
+         yAxes: [{
+            gridLines: {
+               display: !1,
+               color: colors.borderColor,
+               zeroLineColor: colors.borderColor
+            }
+         }]
+      }
+   },
+   
+   barChartjs = document.getElementById("barChartjs");
+    barChartjs && new Chart(barChartjs, {
+   type: "bar",
+   data: ChartData,
+   options: ChartOptions
+});
+}
+
+</script>

@@ -1,0 +1,190 @@
+
+<div >
+    <canvas id="barChartjs" width="400" height="300"></canvas>
+</div> <!-- /.card-body -->
+                  
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/tinycolor-min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <!-- <script src="js/apps.js"></script> -->
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
+    var element1 = document.getElementById("barChartjs");
+   var data = [
+    [
+        "T1", [
+            ["tốt", 23, "rgba(0,85,255,1)"],
+            ["xấu", 11, "rgba(60,141,188,1)"],
+            ["trung bình", 21, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T2", [
+            ["tốt", 43, "rgba(0,85,255,1)"],
+            ["xấu", 22, "rgba(60,141,188,1)"],
+            ["trung bình", 66, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T3", [
+            ["tốt", 30, "rgba(0,85,255,1)"],
+            ["xấu", 15, "rgba(60,141,188,1)"],
+            ["trung bình", 35, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T4", [
+            ["tốt", 50, "rgba(0,85,255,1)"],
+            ["xấu", 28, "rgba(60,141,188,1)"],
+            ["trung bình", 40, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T5", [
+            ["tốt", 60, "rgba(0,85,255,1)"],
+            ["xấu", 25, "rgba(60,141,188,1)"],
+            ["trung bình", 55, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T6", [
+            ["tốt", 33, "rgba(0,85,255,1)"],
+            ["xấu", 17, "rgba(60,141,188,1)"],
+            ["trung bình", 44, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T7", [
+            ["tốt", 45, "rgba(0,85,255,1)"],
+            ["xấu", 18, "rgba(60,141,188,1)"],
+            ["trung bình", 52, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T8", [
+            ["tốt", 72, "rgba(0,85,255,1)"],
+            ["xấu", 20, "rgba(60,141,188,1)"],
+            ["trung bình", 48, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T9", [
+            ["tốt", 81, "rgba(0,85,255,1)"],
+            ["xấu", 32, "rgba(60,141,188,1)"],
+            ["trung bình", 58, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T10", [
+            ["tốt", 65, "rgba(0,85,255,1)"],
+            ["xấu", 22, "rgba(60,141,188,1)"],
+            ["trung bình", 70, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T11", [
+            ["tốt", 90, "rgba(0,85,255,1)"],
+            ["xấu", 40, "rgba(60,141,188,1)"],
+            ["trung bình", 75, "rgba(60,255,188,1)"]
+        ]
+    ],
+    [
+        "T12", [
+            ["tốt", 100, "rgba(0,85,255,1)"],
+            ["xấu", 50, "rgba(60,141,188,1)"],
+            ["trung bình", 85, "rgba(60,255,188,1)"]
+        ]
+    ]
+];
+
+
+
+    Bar(data, element1);
+});
+
+function Bar(data, element) {
+    const datasets = [];
+    const so_cot = data[0][1].length;
+
+    // Tạo datasets từ dữ liệu
+    for (let i = 0; i < so_cot; i++) {
+        const label = data[0][1][i][0]; // Lấy tên cột (e.g., "tốt")
+        const backgroundColor = data.map(row => row[1][i][2]); // Màu sắc của từng thời điểm
+        const values = data.map(row => row[1][i][1]); // Giá trị tại từng thời điểm
+
+        datasets.push({
+            label: label,
+            barThickness: 10,
+            backgroundColor: backgroundColor,
+            borderColor: "rgba(0,85,255,1)",
+            pointRadius: !1,
+            pointColor: "#3b8bba",
+            pointStrokeColor: "rgba(60,141,188,1)",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(60,141,188,1)",
+            data: values,
+            fill: "",
+            lineTension: .1
+        });
+    }
+
+    // Tạo labels (e.g., ["T1", "T2"])
+    const labels = data.map(row => row[0]);
+
+    // Cấu hình dữ liệu cho biểu đồ
+    const ChartData = {
+        labels: labels,
+        datasets: datasets
+    };
+
+    // Tạo biểu đồ
+    new Chart(element, {
+        type: 'bar',
+        data: ChartData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+
+
+var ChartOptions = {
+      maintainAspectRatio: !1,
+      responsive: !0,
+      legend: {
+         display: !1
+      },
+      scales: {
+         xAxes: [{
+            gridLines: {
+               display: !1
+            }
+         }],
+         yAxes: [{
+            gridLines: {
+               display: !1,
+               color: colors.borderColor,
+               zeroLineColor: colors.borderColor
+            }
+         }]
+      }
+   },
+   
+   barChartjs = document.getElementById("barChartjs");
+    barChartjs && new Chart(barChartjs, {
+   type: "bar",
+   data: ChartData,
+   options: ChartOptions
+});
+}
+
+</script>
