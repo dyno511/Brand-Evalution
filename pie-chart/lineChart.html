@@ -1,95 +1,168 @@
 <div id="chart1" style="width: 600px;height:300px;"></div>
 <div id="chart2" style="width: 600px;height:300px;"></div>
-                  
-  <script src="echarts.min.js" ></script>
-    <script type="text/javascript">
-      
+<script src="echarts.min.js" ></script>
+<script type="text/javascript">
+   document.addEventListener("DOMContentLoaded", function () {
+       var element1 = document.getElementById("barChartjs");
+       var data = [
+       [
+           "T1", [
+               ["tốt", 23, "rgba(0,85,255,1)"],
+               ["xấu", 11, "rgba(60,141,188,1)"],
+               ["trung bình", 21, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T2", [
+               ["tốt", 43, "rgba(0,85,255,1)"],
+               ["xấu", 22, "rgba(60,141,188,1)"],
+               ["trung bình", 66, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T3", [
+               ["tốt", 30, "rgba(0,85,255,1)"],
+               ["xấu", 15, "rgba(60,141,188,1)"],
+               ["trung bình", 35, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T4", [
+               ["tốt", 50, "rgba(0,85,255,1)"],
+               ["xấu", 28, "rgba(60,141,188,1)"],
+               ["trung bình", 40, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T5", [
+               ["tốt", 60, "rgba(0,85,255,1)"],
+               ["xấu", 25, "rgba(60,141,188,1)"],
+               ["trung bình", 55, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T6", [
+               ["tốt", 33, "rgba(0,85,255,1)"],
+               ["xấu", 17, "rgba(60,141,188,1)"],
+               ["trung bình", 44, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T7", [
+               ["tốt", 45, "rgba(0,85,255,1)"],
+               ["xấu", 18, "rgba(60,141,188,1)"],
+               ["trung bình", 52, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T8", [
+               ["tốt", 72, "rgba(0,85,255,1)"],
+               ["xấu", 20, "rgba(60,141,188,1)"],
+               ["trung bình", 48, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T9", [
+               ["tốt", 81, "rgba(0,85,255,1)"],
+               ["xấu", 32, "rgba(60,141,188,1)"],
+               ["trung bình", 58, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T10", [
+               ["tốt", 65, "rgba(0,85,255,1)"],
+               ["xấu", 22, "rgba(60,141,188,1)"],
+               ["trung bình", 70, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T11", [
+               ["tốt", 90, "rgba(0,85,255,1)"],
+               ["xấu", 40, "rgba(60,141,188,1)"],
+               ["trung bình", 75, "rgba(60,255,188,1)"]
+           ]
+       ],
+       [
+           "T12", [
+               ["tốt", 100, "rgba(0,85,255,1)"],
+               ["xấu", 50, "rgba(60,141,188,1)"],
+               ["trung bình", 85, "rgba(60,255,188,1)"]
+           ]
+       ]
+   ];
+   
+   
+   
+       Line(data, element1);
+   });
+   
+   
+     function Line(data, element) {
+    const chart1 = echarts.init(document.getElementById('chart1'));
 
-// Use ECharts connect to sync tooltips / axisPointers between multiple chart
-// https://echarts.apache.org/en/api.html#echarts.connect
+    // Tạo labels từ dữ liệu (e.g., ["T1", "T2", "T3", ...])
+    const labels = data.map(row => row[0]);
 
-const chart1 = echarts.init(document.getElementById('chart1'));
-const option1 = {
-  title: {
-    text: 'Chart 1',
-    left: 'center',
-  },
-  grid: {
-    show: true,
-    top: 30,
-    backgroundColor: '#F5F5F5',
-  },
-  tooltip: {
-    trigger: 'axis'
-  },
-  legend: {
-    data: ['Grapes', 'Bananas', 'Apples'],
-    bottom: 0,
-  },
-  xAxis: {
-    data: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00']
-  },
-  yAxis: {},
-  series: [
-    {
-      name: 'Apples',
-      type: 'line',
-      data: [10, 35, 20, 13, 12, 18, 41]
-    },
-    {
-      name: 'Bananas',
-      type: 'line',
-      data: [20, 11, 10, 9, 8, 8, 1]
+    // Tạo datasets từ dữ liệu
+    const datasets = [];
+    const so_cot = data[0][1].length;
+
+    for (let i = 0; i < so_cot; i++) {
+        const label = data[0][1][i][0]; // Lấy tên cột (e.g., "tốt")
+        const backgroundColor = data.map(row => row[1][i][2]); // Màu sắc của từng thời điểm
+        const values = data.map(row => row[1][i][1]); // Giá trị tại từng thời điểm
+
+        // Thêm dữ liệu vào datasets
+        datasets.push({
+            name: label,
+            type: 'line',
+            data: values,
+            lineStyle: {
+                color: backgroundColor[0], // Lấy màu sắc đầu tiên làm màu chính
+            },
+        });
     }
-  ]
-};
 
-const chart2 = echarts.init(document.getElementById('chart2'));
-const option2 = {
-  title: {
-    text: 'Chart 2',
-    left: 'center',
-  },
-  grid: {
-    show: true,
-    top: 30,
-    backgroundColor: '#F5F5F5',
-  },
-  tooltip: {
-    trigger: 'axis'
-  },
-  legend: {
-    data: ['Grapes', 'Bananas', 'Apples'],
-    bottom: 0,
-  },
-  xAxis: {
-    data: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00']
-  },
-  yAxis: [{}],
-  series: [
-    {
-      name: 'Apples',
-      type: 'line',
-      data: [25, 5, 17, 11, 33, 32, 2]
-    },
-    {
-      name: 'Bananas',
-      type: 'line',
-      data: [1, 3, 2, 6, 7, 8, 11]
-    }
-  ],
-  dataZoom: [
-    // { yAxisIndex: 0, filterMode: 'none', startValue: 20, endValue: 30 }
-  ]
-};
+    // Thiết lập options cho biểu đồ
+    const option1 = {
+        title: {
+            text: 'Chart 1',
+            left: 'center',
+        },
+        grid: {
+            show: true,
+            top: 30,
+            backgroundColor: '#F5F5F5', // Màu nền
+        },
+        tooltip: {
+            trigger: 'axis',
+        },
+        legend: {
+            data: datasets.map(ds => ds.name), // Lấy tên các cột
+            bottom: 0,
+        },
+        xAxis: {
+            type: 'category',
+            data: labels, // Dùng labels làm dữ liệu trục X
+        },
+        yAxis: {
+            type: 'value',
+        },
+        series: datasets, // Truyền datasets vào series
+    };
 
-// https://echarts.apache.org/en/api.html#echarts.connect
-chart1.setOption(option1);
-chart2.setOption(option2);
-chart1.group = 'group1';
-chart2.group = 'group1';
-echarts.connect('group1');
+    // Khởi tạo biểu đồ
+    chart1.setOption(option1);
 
-
-    </script>
-
+   chart1.group = 'group1';
+   echarts.connect('group1');
+   
+   
+      }
+   
+   
+   // https://echarts.apache.org/en/api.html#echarts.connect
+   
+   
+       
+</script>
